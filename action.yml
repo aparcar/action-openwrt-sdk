@@ -1,0 +1,7 @@
+name: "OpenWrt sdk"
+description: "Build OpenWrt packages via an SDK"
+author: aparcar
+runs:
+  using: docker
+  image: Dockerfile
+
