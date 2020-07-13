@@ -21,7 +21,9 @@ echo -e "\n---- feeds.conf --- \n"
 
 make defconfig
 
-PACKAGES="$(./scripts/feeds list -r $FEEDNAME | awk '{ print $1 }')"
+PACKAGES_FEED="$(./scripts/feeds list -r $FEEDNAME | awk '{ print $1 }')"
+PACKAGES="${PACKAGES:-$PACKAGES_FEED}"
+
 for PACKAGE in $PACKAGES; do
 	echo "Building $PACKAGE"
         make "package/$PACKAGE/compile" \
