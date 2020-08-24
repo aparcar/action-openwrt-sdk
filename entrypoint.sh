@@ -7,8 +7,13 @@ IGNORE_ERRORS="${IGNORE_ERRORS:-n m}"
 
 cd /home/build/openwrt/
 
-echo "src-link $FEEDNAME $GITHUB_WORKSPACE/" >> feeds.conf.default
+cp feeds.conf.default feeds.conf
+echo "src-link $FEEDNAME $GITHUB_WORKSPACE/" >> feeds.conf
 
+#shellcheck disable=SC2153
+for EXTRA_FEED in $EXTRA_FEEDS; do
+	echo "$EXTRA_FEED" | tr '|' ' ' >> feeds.conf
+done
 
 ./scripts/feeds update -a
 ./scripts/feeds install -d y -p "$FEEDNAME" -a -f
