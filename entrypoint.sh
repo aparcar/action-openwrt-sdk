@@ -25,8 +25,10 @@ fi
 
 make defconfig
 make \
+	BUILD_LOG="$BUILD_LOG" \
 	CONFIG_SIGNED_PACKAGES="$SIGNED_PACKAGES" \
 	IGNORE_ERRORS="$IGNORE_ERRORS" \
+	V="$V" \
 	-j "$(nproc)"
 
 mv bin/ "$GITHUB_WORKSPACE/"
