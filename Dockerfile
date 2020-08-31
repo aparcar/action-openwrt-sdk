@@ -1,4 +1,5 @@
-FROM openwrtorg/sdk
+ARG ARCH=mips_24kc
+FROM openwrtorg/sdk:$ARCH
 
 LABEL "com.github.actions.name"="OpenWrt SDK"
 
