@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -ef
 
 FEEDNAME="${FEED_NAME:-action}"
 IGNORE_ERRORS="${IGNORE_ERRORS:-n m}"
@@ -16,7 +16,12 @@ for EXTRA_FEED in $EXTRA_FEEDS; do
 done
 
 ./scripts/feeds update -a
-./scripts/feeds install -d y -p "$FEEDNAME" -a -f
+if [ -z "$PACKAGES" ]; then
+	./scripts/feeds install -d y -p "$FEEDNAME" -a -f
+else
+	# shellcheck disable=SC2086
+	./scripts/feeds install -d y -f $PACKAGES
+fi
 
 make defconfig
 make \
