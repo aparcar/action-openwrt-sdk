@@ -32,3 +32,7 @@ make \
 	-j "$(nproc)"
 
 mv bin/ "$GITHUB_WORKSPACE/"
+
+if [ -d logs/ ]; then
+	mv logs/ "$GITHUB_WORKSPACE/"
+fi
